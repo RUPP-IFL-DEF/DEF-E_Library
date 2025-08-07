@@ -1,0 +1,104 @@
+/* Record.css */
+
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  main {
+    padding: 1.5rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    font-weight: 700;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: #222;
+  }
+  
+  /* Grid container for cards */
+  .record-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.25rem;
+  }
+  
+  /* Each record card */
+  .record-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgb(0 0 0 / 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .record-card:hover {
+    box-shadow: 0 6px 16px rgb(0 0 0 / 0.15);
+  }
+  
+  .record-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+  
+  .record-content {
+    padding: 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .record-id {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 0.25rem;
+    user-select: text;
+  }
+  
+  .record-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #111;
+    flex-grow: 1;
+  }
+  
+  .record-status {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #3b82f6; /* Tailwind blue-500 */
+  }
+  
+  .record-status.pending {
+    color: #f59e0b; /* amber-500 */
+  }
+  
+  .record-status.approved {
+    color: #10b981; /* emerald-500 */
+  }
+  
+  .record-status.rejected {
+    color: #ef4444; /* red-500 */
+  }
+  
+  /* Empty state */
+  .empty-message {
+    font-size: 1.1rem;
+    color: #444;
+    text-align: center;
+    padding: 3rem 0;
+  }
+  
+  /* Loading state */
+  .loading-message {
+    font-size: 1rem;
+    color: #888;
+    text-align: center;
+    padding: 2rem 0;
+  }
+  

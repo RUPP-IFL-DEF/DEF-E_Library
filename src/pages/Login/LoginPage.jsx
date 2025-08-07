@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import AuthForm from '../../pages/Auth/AuthForm'; // your reusable form
+import AuthForm from '../../pages/Auth/AuthForm';
 import './LoginPage.css';
-
 
 const API_BASE = 'https://def-e-library-server.onrender.com/api/auth';
 
-const LoginPage = () => {
-  const [mode, setMode] = useState('signin'); // 'signin' or 'signup'
+const LoginPage = ({ setIsLoggedIn }) => {
+  const [mode, setMode] = useState('signin');
   const [error, setError] = useState('');
   const [info, setInfo] = useState('');
   const [formData, setFormData] = useState({
@@ -16,16 +15,17 @@ const LoginPage = () => {
     email: '',
     phoneNumber: '',
     password: '',
-    emailOrUsername: '', // for sign in
+    emailOrUsername: '',
   });
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
+      setIsLoggedIn(true);
       navigate('/');
     }
-  }, [navigate]); // <-- added dependency array here
+  }, [navigate, setIsLoggedIn]);
 
   const handleChange = (e) => {
     setError('');
@@ -74,6 +74,7 @@ const LoginPage = () => {
         password,
       });
       localStorage.setItem('token', res.data.token);
+      setIsLoggedIn(true); // ✅ Update state in App
       navigate('/');
     } catch (err) {
       setError(err.response?.data?.message || 'Sign in failed');
@@ -83,10 +84,7 @@ const LoginPage = () => {
   return (
     <div className="login-page">
       <div className="overlay">
-        {/* If your image is in public folder */}
         <img src="/deff.jpeg" alt="Logo" className="logo" />
-        {/* Or, if you imported: */}
-        {/* <img src={logo} alt="Logo" className="logo" /> */}
 
         <div className="login-container">
           {mode === 'signup' && (
